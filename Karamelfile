@@ -1,13 +1,13 @@
 dependencies:
   - recipe: hiway::hiway_client
     local: 
-      - hadoop::rm
+      - hops::rm
     global: 
-      - hadoop::dn
-      - hadoop::nn
+      - hops::dn
+      - hops::nn
   - recipe: hiway::hiway_worker
     local: 
-      - hadoop::nm
+      - hops::nm
   - recipe: hiway::galaxy_worker
     local: 
       - hiway::hiway_worker
