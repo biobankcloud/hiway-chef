@@ -38,6 +38,7 @@ recipe           "hiway::RNAseq_worker", "Runs the TRAPLINE RNAseq Galaxy Workfl
 #recipe           "hiway::montage_m17_4_worker", "Prepares the Montage DAX Workflow on the Workers"
 
 depends 'hadoop'
+depends 'hops'
 
 %w{ ubuntu debian rhel centos }.each do |os|
   supports os
