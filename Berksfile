@@ -3,7 +3,7 @@ source "https://api.berkshelf.com"
 metadata
 
 cookbook 'java'
-cookbook 'git'
+cookbook 'git', '<4.2.3'
 cookbook 'hops', github: 'hopshadoop/hops-hadoop-chef'
 cookbook 'ndb', github: 'hopshadoop/ndb-chef'
 cookbook 'hadoop', github: 'hopshadoop/apache-hadoop-chef'
