@@ -68,7 +68,7 @@ else
     group node[:hadoop][:group]
     code <<-EOH
     set -e && set -o pipefail
-      sed -i 's%<hadoop.version>[^<]*</hadoop.version>%<hadoop.version>#{node[:hadoop][:version]}</hadoop.version>%g' /tmp/hiway/hiway-core/pom.xml
+#      sed -i 's%<hadoop.version>[^<]*</hadoop.version>%<hadoop.version>#{node[:hadoop][:version]}</hadoop.version>%g' /tmp/hiway/hiway-core/pom.xml
       mvn -f /tmp/hiway/pom.xml package
       version=$(grep -Po '(?<=^\t<version>)[^<]*(?=</version>)' /tmp/hiway/pom.xml)
       cp -r /tmp/hiway/hiway-dist/target/hiway-dist-$version/hiway-$version #{node[:hiway][:hiway][:home]}
@@ -141,7 +141,7 @@ bash "configure_hadoop_for_hiway" do
     then
       perl -i -0pe 's%<name>yarn.application.classpath</name>\\s*<value>%<name>yarn.application.classpath</name>\\n\\t\\t<value>#{node[:hiway][:hiway][:home]}/\\*, #{node[:hiway][:hiway][:home]}/lib/\\*, %' #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml
     else
-      sed -i 's%</configuration>%\t<property>\n\t\t<name>yarn.application.classpath</name>\\n\\t\\t<value>#{node[:hiway][:hiway][:home]}/\\*, #{node[:hiway][:hiway][:home]}/lib/\\*, #{node[:hadoop][:yarn][:app_classpath]}</value>\\n\\t</property>\\n</configuration>%' #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml
+      sed -i 's%</configuration>%<property><name>yarn.application.classpath</name><value>#{node[:hiway][:hiway][:home]}/*, #{node[:hiway][:hiway][:home]}/lib/*, #{node[:hadoop][:yarn][:app_classpath]}</value></property></configuration>%' #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml
     fi
   EOH
   not_if "grep -q yarn.application.classpath #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml && grep -q #{node[:hiway][:hiway][:home]} #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml"
