@@ -62,8 +62,7 @@ attribute "hiway/data",
 attribute "hiway/release",
 :display_name => "Release or snaphsot",
 :description => "Install Hi-WAY release as opposed to the latest snapshot version",
-:type => 'string',
-:default => "true"
+:type => 'string'
 
 attribute "hiway/hiway/am/memory_mb",
 :display_name => "Hi-WAY Application Master Memory in MB",

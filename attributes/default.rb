@@ -10,8 +10,8 @@ default[:hiway][:software][:dir]                    = node[:hadoop][:dir]
 
 default[:hiway][:hiway][:release][:version]         = "1.0.0-beta"
 default[:hiway][:hiway][:release][:targz]           = "hiway-dist-#{node[:hiway][:hiway][:release][:version]}.tar.gz"
-default[:hiway][:hiway][:release][:url]             = "https://github.com/marcbux/Hi-WAY/releases/download/#{node[:hiway][:hiway][:release][:version]}/#{node[:hiway][:hiway][:release][:targz]}"
-default[:hiway][:hiway][:github_url]                = "https://github.com/marcbux/Hi-WAY.git"
+default[:hiway][:hiway][:release][:url]             = "https://github.com/biobankcloud/Hi-WAY/releases/download/#{node[:hiway][:hiway][:release][:version]}/#{node[:hiway][:hiway][:release][:targz]}"
+default[:hiway][:hiway][:github_url]                = "https://github.com/biobankcloud/Hi-WAY.git"
 default[:hiway][:hiway][:home]                      = "#{node[:hiway][:software][:dir]}/hiway"
 default[:hiway][:hiway][:hdfs][:basedir]            = "/"
 default[:hiway][:hiway][:am][:memory_mb]            = 512
