@@ -1,4 +1,4 @@
-name: saasfeeDistributedEc2Variantcall
+name: saasfeeStandaloneEc2Variantcall
 ec2:
     type: m3.large
     ami: ami-234ecc54
@@ -23,8 +23,8 @@ attrs:
         memory_mb: '512'
         vcores: '1'
       worker:
-        memory_mb: '6144'
-        vcores: '2'
+        memory_mb: '3072'
+        vcores: '1'
     variantcall:
       reads:
         sample_id: 'HG02025'
@@ -41,12 +41,11 @@ attrs:
       user: 'hiway'
     tmp_dir: '/mnt/hadoop'
     data_dir: '/mnt/hadoop'
-    num_replicas: '2'
   hdfs:
     user: 'hiway'
     
 groups:
-  master:
+  masterworker:
     size: 1
     recipes:
         - hadoop::nn
@@ -55,10 +54,6 @@ groups:
         - hiway::cuneiform_client
         - hiway::hiway_client
         - hiway::variantcall_client
-
-  workers:
-    size: 4
-    recipes:
         - hadoop::dn
         - hadoop::nm
         - hiway::cuneiform_worker

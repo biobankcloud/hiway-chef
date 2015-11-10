@@ -6,14 +6,14 @@ default[:hiway][:release]                           = "false"
 default[:hiway][:user]                              = "hiway"
 default[:hiway][:home]                              = "/home/#{node[:hiway][:user]}"
 default[:hiway][:data]                              = "#{node[:hiway][:home]}/data"
-default[:hiway][:software][:dir]                    = node[:hadoop][:dir]
+default[:hiway][:software][:dir]                    = "#{node[:hiway][:home]}/software"
 
 default[:hiway][:hiway][:release][:version]         = "1.0.0-beta"
 default[:hiway][:hiway][:release][:targz]           = "hiway-dist-#{node[:hiway][:hiway][:release][:version]}.tar.gz"
 default[:hiway][:hiway][:release][:url]             = "https://github.com/biobankcloud/Hi-WAY/releases/download/#{node[:hiway][:hiway][:release][:version]}/#{node[:hiway][:hiway][:release][:targz]}"
 default[:hiway][:hiway][:github_url]                = "https://github.com/biobankcloud/Hi-WAY.git"
 default[:hiway][:hiway][:home]                      = "#{node[:hiway][:software][:dir]}/hiway"
-default[:hiway][:hiway][:hdfs][:basedir]            = "/"
+default[:hiway][:hiway][:hdfs][:basedir]            = "/user/#{node[:hiway][:user]}"
 default[:hiway][:hiway][:am][:memory_mb]            = 512
 default[:hiway][:hiway][:am][:vcores]               = 1
 default[:hiway][:hiway][:worker][:memory_mb]        = 1024
