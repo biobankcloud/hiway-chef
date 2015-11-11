@@ -72,7 +72,8 @@ else
       mvn -f /tmp/hiway/pom.xml package
       version=$(grep -Po '(?<=^\t<version>)[^<]*(?=</version>)' /tmp/hiway/pom.xml)
       cp -r /tmp/hiway/hiway-dist/target/hiway-dist-$version/hiway-$version #{node[:hiway][:hiway][:home]}
-      mv #{node[:hiway][:hiway][:home]}/hiway-core-$version.jar #{node[:hiway][:hiway][:home]}/hiway-core.jar
+      rm -f #{node[:hiway][:hiway][:home]}/hiway-core.jar
+      ln -s #{node[:hiway][:hiway][:home]}/hiway-core-$version.jar #{node[:hiway][:hiway][:home]}/hiway-core.jar
     EOH
     not_if { ::File.exist?("#{node[:hiway][:hiway][:home]}") }
   end
