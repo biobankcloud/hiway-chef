@@ -135,9 +135,9 @@ bash "copy_input_data_to_hdfs" do
   group node[:hadoop][:group]
   code <<-EOH
   set -e && set -o pipefail
-    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:annovardb][:directory]} #{node[:hiway][:hiway][:hdfs][:basedir]}
-    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:reads][:sample_id]} #{node[:hiway][:hiway][:hdfs][:basedir]}
-    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:reference][:id]} #{node[:hiway][:hiway][:hdfs][:basedir]}
+    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:annovardb][:directory]} #{node[:hiway][:hiway][:hdfs][:basedir]}/#{node[:hiway][:variantcall][:annovardb][:directory]}
+    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:reads][:sample_id]} #{node[:hiway][:hiway][:hdfs][:basedir]}/#{node[:hiway][:variantcall][:reads][:sample_id]}
+    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:reference][:id]} #{node[:hiway][:hiway][:hdfs][:basedir]}/#{node[:hiway][:variantcall][:reference][:id]}
     rm -r #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:annovardb][:directory]}
     rm -r #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:reads][:sample_id]}
     rm -r #{node[:hiway][:data]}/#{node[:hiway][:variantcall][:reference][:id]}

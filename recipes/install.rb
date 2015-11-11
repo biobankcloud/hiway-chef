@@ -3,3 +3,5 @@ node.default['java']['install_flavor'] = "openjdk"
 
 # install Java 1.7
 include_recipe "java"
+
+# package "openjdk-7-jdk"

@@ -9,6 +9,13 @@ user node[:hiway][:user] do
   not_if "getent passwd #{node[:hiway][:user]}"
 end
 
+# add user hiway to group hadoop
+group node[:hadoop][:group] do
+  action :modify
+  members node[:hiway][:user] 
+  append true
+end
+
 # create data directory
 directory "#{node[:hiway][:data]}" do
   owner node[:hiway][:user]
@@ -17,11 +24,13 @@ directory "#{node[:hiway][:data]}" do
   action :create
 end
 
-# add user hiway to group hadoop
-group node[:hadoop][:group] do
-  action :modify
-  members node[:hiway][:user] 
-  append true
+directory node[:hiway][:software][:dir] do
+  owner node[:hiway][:user]
+  group node[:hadoop][:group]
+  mode "0774"
+  recursive true
+  action :create
+  not_if { File.directory?("#{node[:hiway][:software][:dir]}") }
 end
 
 if node[:hiway][:release] == "true"
@@ -101,7 +110,7 @@ bash "configure_hadoop_for_hiway" do
     then
       perl -i -0pe 's%<name>yarn.application.classpath</name>\\s*<value>%<name>yarn.application.classpath</name>\\n\\t\\t<value>#{node[:hiway][:hiway][:home]}/\\*, #{node[:hiway][:hiway][:home]}/lib/\\*, %' #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml
     else
-      sed -i 's%</configuration>%\t<property>\n\t\t<name>yarn.application.classpath</name>\\n\\t\\t<value>#{node[:hiway][:hiway][:home]}/\\*, #{node[:hiway][:hiway][:home]}/lib/\\*, #{node[:hadoop][:yarn][:app_classpath]}</value>\\n\\t</property>\\n</configuration>%' #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml
+      sed -i 's%</configuration>%<property><name>yarn.application.classpath</name><value>#{node[:hiway][:hiway][:home]}/*, #{node[:hiway][:hiway][:home]}/lib/*, #{node[:hadoop][:yarn][:app_classpath]}</value></property></configuration>%' #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml
     fi
   EOH
   not_if "grep -q yarn.application.classpath #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml && grep -q #{node[:hiway][:hiway][:home]} #{node[:hadoop][:home]}/etc/hadoop/yarn-site.xml"

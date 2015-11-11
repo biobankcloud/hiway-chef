@@ -32,8 +32,8 @@ bash "stage_out_input_data" do
   set -e && set -o pipefail
     tar xzvf #{Chef::Config[:file_cache_path]}/#{node[:hiway][:galaxy101][:exons][:targz]} -C #{node[:hiway][:data]}
     tar xzvf #{Chef::Config[:file_cache_path]}/#{node[:hiway][:galaxy101][:snps][:targz]} -C #{node[:hiway][:data]}
-    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:galaxy101][:exons][:bed]} #{node[:hiway][:hiway][:hdfs][:basedir]}
-    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:galaxy101][:snps][:bed]} #{node[:hiway][:hiway][:hdfs][:basedir]}
+    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:galaxy101][:exons][:bed]} #{node[:hiway][:hiway][:hdfs][:basedir]}/#{node[:hiway][:galaxy101][:exons][:bed]}
+    #{node[:hadoop][:home]}/bin/hdfs dfs -put #{node[:hiway][:data]}/#{node[:hiway][:galaxy101][:snps][:bed]} #{node[:hiway][:hiway][:hdfs][:basedir]}/#{node[:hiway][:galaxy101][:snps][:bed]}
     rm #{node[:hiway][:data]}/#{node[:hiway][:galaxy101][:exons][:bed]}
     rm #{node[:hiway][:data]}/#{node[:hiway][:galaxy101][:snps][:bed]}
   EOH
