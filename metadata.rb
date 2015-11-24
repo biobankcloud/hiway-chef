@@ -111,3 +111,8 @@ attribute "hiway/variantcall/reference/chromosomes",
 :description => "The chromosomes of the HG38 reference against which sequence data is to be aligned",
 :type => 'array',
 :default => ["chr22", "chrY"]
+
+
+attribute "hiway/home",
+:description => "Hiway home (base directory) for the installation",
+:type => 'string'
