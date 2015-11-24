@@ -2,7 +2,7 @@
 driver:
   name: vagrant
   customize:
-    memory: 3072
+    memory: 5120
     cpus: 2
     natdnshostresolver1: "on"
     natdnsproxy1: "on"
@@ -37,29 +37,32 @@ suites:
       - recipe[hiway::install]
       - recipe[hiway::hiway_client]
       - recipe[hiway::hiway_worker]
-#      - recipe[hiway::galaxy_worker]
+      - recipe[hiway::galaxy_worker]
       - recipe[hiway::cuneiform_client]
       - recipe[hiway::cuneiform_worker]
       - recipe[hiway::helloworld_client]
 #      - recipe[hiway::helloworld_run_loc]
-#      - recipe[hiway::wordcount_client]
+      - recipe[hiway::wordcount_client]
 #      - recipe[hiway::wordcount_run_loc]
-#      - recipe[hiway::montage_synth_client]
+      - recipe[hiway::montage_synth_client]
 #      - recipe[hiway::montage_synth_run_hw]
-#      - recipe[hiway::galaxy101_client]
-#      - recipe[hiway::galaxy101_worker]
+      - recipe[hiway::galaxy101_client]
+      - recipe[hiway::galaxy101_worker]
 #      - recipe[hiway::galaxy101_run_hw]
       - recipe[hiway::variantcall_client]
       - recipe[hiway::variantcall_worker]
-      - recipe[hiway::variantcall_run_hw]
+#      - recipe[hiway::variantcall_run_hw]
+#      - recipe[hiway::variantcall_scale_client]
+#      - recipe[hiway::variantcall_scale_worker]
 #      - recipe[hiway::RNAseq_client]
 #      - recipe[hiway::RNAseq_worker]
-#      - recipe[hiway::montage_m17_4_client]
-#      - recipe[hiway::montage_m17_4_worker]
+      - recipe[hiway::montage_m17_4_client]
+      - recipe[hiway::montage_m17_4_worker]
 
     attributes:
          hadoop:
-            version: "2.4.0"
+            container_cleanup_delay_sec: "604800"
+            version: "2.7.1"
             nn:
                private_ips: ["10.0.2.15"]
             dn:
@@ -73,22 +76,31 @@ suites:
             cluster: vagrant
             yarn:
               user: "hiway"
-              vcores: "3"
+              vcores: "2"
+              nm:
+                memory_mbs: "5632"
             mr:
               user: "hiway"
          hiway:
            user: "hiway"
+           hiway:
+             worker:
+               vcores: "2"
+               memory_mb: "5120"
+           variantcall:
+             reference:
+               id: "hg19"
+               chromosomes: ["chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chr22", "chrX", "chrY", "chrM"]
+           private_ips: ["10.0.2.15"]
+           public_ips: ["10.0.2.15"]
          hdfs:
            user: "hiway"
          kmon:
-            private_ips: ["10.0.2.15"]
-            public_ips: ["10.0.2.15"]
+           private_ips: ["10.0.2.15"]
+           public_ips: ["10.0.2.15"]
          kagent:
-            private_ips: ["10.0.2.15"]
-            public_ips: ["10.0.2.15"]
-         hiway:
-            private_ips: ["10.0.2.15"]
-            public_ips: ["10.0.2.15"]
+           private_ips: ["10.0.2.15"]
+           public_ips: ["10.0.2.15"]
          private_ips: ["10.0.2.15"]
          public_ips: ["10.0.2.15"]
          vagrant: "enabled"
