@@ -124,3 +124,6 @@ attribute "hiway/variantcall/reference/id",
 :type => 'string',
 :default => "hg38"
 
+attribute "hiway/hiway/hdfs/basedir",
+:description => "Hiway home (base directory) for the installation",
+:type => 'string'
