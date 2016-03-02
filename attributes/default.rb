@@ -20,6 +20,8 @@ default[:hiway][:hiway][:worker][:memory_mb]        = 1024
 default[:hiway][:hiway][:worker][:vcores]           = 1
 default[:hiway][:hiway][:scheduler]                 = "placementAware"
 
+default.hiway.test.variable                         = "check"
+
 default[:hiway][:cuneiform][:release][:version]     = "2.0.0-beta"
 default[:hiway][:cuneiform][:release][:targz]       = "cuneiform-dist-#{node[:hiway][:cuneiform][:release][:version]}.tar.gz"
 default[:hiway][:cuneiform][:release][:url]         = "https://github.com/joergen7/cuneiform/releases/download/#{node[:hiway][:cuneiform][:release][:version]}/#{node[:hiway][:cuneiform][:release][:targz]}"
